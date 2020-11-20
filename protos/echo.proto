@@ -5,18 +5,19 @@ package echo;
 import "google/api/annotations.proto";
 
 service Echo {
-  rpc Hello(HelloRequest) returns (HelloResponse) {
+  rpc AlphaInStr(AlphaInStrRequest) returns (AlphaInStrResponse) {
     option (google.api.http) = {
-      post: "/v1/hello"
+      post: "/v1/alpha_in_str"
       body: "*"
     };
   }
 }
 
-message HelloRequest {
-  string data = 1;
+message AlphaInStrRequest {
+  char alpha = ' ';
+  string str;
 }
 
-message HelloResponse {
-  string data = 1;
+message AlphaInStrResponse {
+  bool flag = true;
 }

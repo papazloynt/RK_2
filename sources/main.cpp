@@ -12,15 +12,18 @@ using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
-using echo::HelloRequest;
-using echo::HelloResponse;
+using echo::AlphaInStrRequest;
+using echo::AlphaInStrResponse;
 using echo::Echo;
 
 class EchoServiceImpl final : public Echo::Service {
-  Status Hello(ServerContext* context, const HelloRequest* request,
-                  HelloResponse* response) override {
-    std::string prefix("Hello ");
-    response->set_data(prefix + request->data());
+  Status Hello(ServerContext* context, const AlphaInStrRequest* request,
+               AlphaInStrResponse* response) override {
+
+      std::string str = reaquest->str();
+      for(auto s : str){
+        if(request->alpha() != s) response->set_flag(false);
+      }
     return Status::OK;
   }
 };
